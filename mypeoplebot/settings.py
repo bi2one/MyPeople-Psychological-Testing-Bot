@@ -12,24 +12,28 @@ MANAGERS = ADMINS
 
 # custom settings - BIZONE
 import os
+
 REDIS_HOST = 'localhost'
 REDIS_PORT = 6379
 PROJECT_ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 BOT_NAME = "bizone_bot"
-BOT_CALLBACK_URL = "http://192.168.164.123:8000/"
+# BOT_CALLBACK_URL = "http://192.168.164.123:8000/"
+BOT_CALLBACK_URL = "http://10.13.227.160/callback/"
 
 consumer_key = 'cd1498d3-61a5-4e03-a98b-065c4212fd39'
 consumer_secret = 'kEVtfEi9tHPnJOmyW5p41BCFqcWNlNNUOJkYz3Sa7mFN53riEhU_6A00'
-oauth_callback_url= 'http://192.168.164.123:8000/oauth_callback/'
+# oauth_callback_url= 'http://192.168.164.123:8000/oauth_callback/'
+oauth_callback_url= 'http://10.13.227.160/oauth_callback/'
 # oauth_file = PROJECT_ROOT_DIR + "/templates/oauth.html"
 # ~custom settings - BIZONE
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+        'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
+#        'NAME': '/home/bizone/public_html/MyPeople-Psychological-Testing-Bot/mypeople',
         'NAME': 'mypeople',                      # Or path to database file if using sqlite3.
-        'USER': '',                      # Not used with sqlite3.
-        'PASSWORD': '',                  # Not used with sqlite3.
+        'USER': 'root',                      # Not used with sqlite3.
+        'PASSWORD': 'dkdnsmrep2',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
@@ -143,8 +147,6 @@ INSTALLED_APPS = (
     'wordbot',
     'pbutils',
     'django_extensions',
-    'tastypie',
-    'compressor',
     'south',
     # Uncomment the next line to enable the admin:
     # 'django.contrib.admin',
