@@ -6,8 +6,8 @@ import os, sys
 pwd =  os.environ["PWD"]
 host = 'localhost'
 
-user='root'
-password='dkdnsmrep2'
+user='mypeople'
+password='mypeople'
 database='mypeople'
 
 ret = get_yes_or_no('Are you sure convert all tables in %s database charset to utf-8 ? (yes/no) [**CRITICAL**] :' % database)

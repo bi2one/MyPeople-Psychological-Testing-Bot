@@ -11,7 +11,10 @@ from wordbot.models import BotInfo, Survey, Question, Answer, Result
 from pprint import pprint
 import ujson
 
+@csrf_exempt
 def home(request):
+    if request.method == 'POST':
+        return callback(request)
     manager = OAuthManager(request)
     surveys = Survey.objects.all()
     return render_to_response('home.html',

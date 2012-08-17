@@ -1,7 +1,14 @@
 # -*- coding: utf-8 -*-
 # Django settings for mypeoplebot project.
 
-DEBUG = True
+import os
+PROJECT_ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
+
+IS_LOCAL = 'Users' in PROJECT_ROOT_DIR
+if IS_LOCAL:
+    DEBUG = True
+else:
+    DEBUG = False
 TEMPLATE_DEBUG = DEBUG
 
 ADMINS = (
@@ -11,20 +18,21 @@ ADMINS = (
 MANAGERS = ADMINS
 
 # custom settings - BIZONE
-import os
-
 REDIS_HOST = 'localhost'
 REDIS_PORT = 6379
-PROJECT_ROOT_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
-BOT_NAME = "bizone_bot"
-# BOT_CALLBACK_URL = "http://192.168.164.123:8000/"
-BOT_CALLBACK_URL = "http://10.13.227.160/callback/"
 
-consumer_key = 'cd1498d3-61a5-4e03-a98b-065c4212fd39'
-consumer_secret = 'kEVtfEi9tHPnJOmyW5p41BCFqcWNlNNUOJkYz3Sa7mFN53riEhU_6A00'
-# oauth_callback_url= 'http://192.168.164.123:8000/oauth_callback/'
-oauth_callback_url= 'http://10.13.227.160/oauth_callback/'
-# oauth_file = PROJECT_ROOT_DIR + "/templates/oauth.html"
+BOT_NAME = "bizone_bot"
+if IS_LOCAL:
+    BOT_CALLBACK_URL = "http://192.168.164.123:8000/callback/"
+    oauth_callback_url= 'http://192.168.164.123:8000/oauth_callback/'
+    consumer_key = '87058115-9053-41ad-97a2-232d5fc9c6f7'
+    consumer_secret = 'YgLRV.sq11yibZaFnlPO1HzCXad_sjwSq47jbjTgOWugk8codkoDTA00'
+else:
+    BOT_CALLBACK_URL = "http://10.13.227.160/callback/"
+    oauth_callback_url= 'http://10.13.227.160/oauth_callback/'
+    consumer_key = 'cd1498d3-61a5-4e03-a98b-065c4212fd39'
+    consumer_secret = 'kEVtfEi9tHPnJOmyW5p41BCFqcWNlNNUOJkYz3Sa7mFN53riEhU_6A00'
+
 # ~custom settings - BIZONE
 
 DATABASES = {
@@ -32,8 +40,8 @@ DATABASES = {
         'ENGINE': 'django.db.backends.mysql', # Add 'postgresql_psycopg2', 'mysql', 'sqlite3' or 'oracle'.
 #        'NAME': '/home/bizone/public_html/MyPeople-Psychological-Testing-Bot/mypeople',
         'NAME': 'mypeople',                      # Or path to database file if using sqlite3.
-        'USER': 'root',                      # Not used with sqlite3.
-        'PASSWORD': 'dkdnsmrep2',                  # Not used with sqlite3.
+        'USER': 'mypeople',                      # Not used with sqlite3.
+        'PASSWORD': 'mypeople',                  # Not used with sqlite3.
         'HOST': '',                      # Set to empty string for localhost. Not used with sqlite3.
         'PORT': '',                      # Set to empty string for default. Not used with sqlite3.
     }
