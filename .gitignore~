@@ -1,6 +1,0 @@
-*.log
-*.pot
-*.pyc
-local_settings.py
-media/bot_info/**
-./mypeople
