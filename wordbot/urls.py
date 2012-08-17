@@ -9,6 +9,7 @@ urlpatterns = patterns('wordbot.views',
     url(r'^$', 'home'),
     url(r'^get_token/$', 'get_token'),
     url(r'^oauth_callback/$', 'oauth_callback'),
+    url(r'^callback/$', 'callback'),
                        
     url(r'^test/$', 'test'),
     url(r'^bot_create/$', 'bot_create'),

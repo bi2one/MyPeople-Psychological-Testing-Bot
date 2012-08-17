@@ -53,7 +53,7 @@ class BotManager(object):
 
     def register(self, bot_name=settings.BOT_NAME, callback=settings.BOT_CALLBACK_URL):
         return self.oauth_manager.access_resource(dict(botName = bot_name,
-                                                       callback = callback),
+                                                       receiveUrl = callback),
                                                   settings.pb_register_url)
     def update(self, name, status='', callback=settings.BOT_CALLBACK_URL, file='', save_db=True):
         files = None

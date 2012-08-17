@@ -183,9 +183,9 @@ def answer_state(action_manager, buddy_id, content, *arguments):
     return next_state
 
 def show_result_state(action_manager, buddy_id, content, *arguments):
-    total_weight = action_manager.get_user_data_value(buddy_id, 'total_weight', -1)
+    total_weight = action_manager.get_user_data_value(buddy_id, 'total_weight', None)
     survey_id = action_manager.get_user_data_value(buddy_id, 'survey_id', -1)
-    if total_weight == -1 or survey_id == -1:
+    if total_weight is None or survey_id == -1:
         action_manager.bot_manager.send_message(buddy_id,
                                                 '잘못된 접근입니다. 처음으로 돌아갑니다.')
     else:
