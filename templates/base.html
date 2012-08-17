@@ -1,0 +1,34 @@
+{% load compress %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>{% block title %}mypeople bot{% endblock %}</title>
+    
+    {% compress css %}
+    <link rel="stylesheet" href="{{MEDIA_URL}}css/test.css" type="text/css" media="all">
+    <link rel="stylesheet" href="{{MEDIA_URL}}css/bootstrap-responsive.min.css" type="text/css" media="all">
+    <link rel="stylesheet" href="{{MEDIA_URL}}css/bootstrap.min.css" type="text/css" media="all">
+    {% endcompress %}
+    {% block css %}{% endblock %}
+
+    {% compress js %}
+    <script type="text/javascript" src="{{MEDIA_URL}}script/bootstrap.min.js"></script>
+    {% endcompress %}
+       
+    {% block js %}{% endblock %}
+  </head>
+  <body>
+
+    {% if messages %}
+    <ul class="messages">
+      {% for message in messages %}
+      <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+      {% endfor %}
+    </ul>
+    {% endif %}
+
+    {% block content %}
+    Empty Content
+    {% endblock %}
+  </body>
+</html>

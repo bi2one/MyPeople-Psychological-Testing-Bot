@@ -1,0 +1,28 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>4. 결과 등록</h3>
+<div>
+  <p>현재, <span style="font-weight:bold;">"{{ survey.name }}"</span> 테스트를 작업중입니다</p>
+  <p><a href="/add_question/?survey_id={{survey.pk}}">질문 목록으로 돌아가기</a></p>
+  
+  {% if survey.result_set.all %}
+  <ul>
+    {% for result in survey.result_set.all %}
+    <li>
+      {{result.weight_start}}&lt;=(가중치)&lt;={{result.weight_end}}
+      <a href="/remove_result/?result_id={{ result.pk }}&survey_id={{ survey.pk }}">지우기</a>
+      <p>
+        {{result.description}}
+      </p>
+    </li>
+    {% endfor %}
+  </ul>
+  {% endif %}
+
+  <form method="POST" action="/add_result/?survey_id={{ survey.pk }}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="등록하기" >
+  </form>
+</div>
+{% endblock %}

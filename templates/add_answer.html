@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>3. 답변 등록</h3>
+<div>
+  <p>현재, <span style="font-weight:bold;">"{{ question.content }}"</span> 질문을 작업중입니다</p>
+  <p><a href="/add_question/?survey_id={{question.survey.pk}}">질문 편집으로 돌아가기</a></p>
+  
+  {% if question.answer_set.all %}
+  <ol>
+    {% for answer in question.answer_set.all %}
+    <li>
+      질문: {{ answer.content }}, 가중치: {{ answer.weight }}
+      <a href="/remove_answer/?answer_id={{ answer.pk }}&question_id={{ question.pk }}">지우기</a>
+    </li>
+    {% endfor %}
+  </ol>
+  {% endif %}
+
+  <h4>직접 추가하려면 여기</h4>
+  <form method="POST" action="/add_answer/?question_id={{ question.pk }}">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <input type="submit" value="직접 추가하기" >
+  </form>
+
+  <input type="button" onclick="location.href='/add_basic_answer/?question_id={{question.pk}}';" value="기본 선택지 등록" >
+  <p>
+    이 방법은 매우 그렇다(5), 다소 그렇다(4), 보통이다(3), 그렇지 않다(2), 아주 그렇지 않다(1) 다섯가지로 답변이 추가됩니다. 괄호에 있는건 가중치.
+  </p>
+</div>
+{% endblock %}

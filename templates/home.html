@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+{% if token %}
+<p>consumer key:</p><p>{{ token.consumer_key }}</p>
+<p>access token:</p><p>{{ token.access_token }}</p>
+{% endif %}
+<input type="button" value="토큰 재발급" onclick="location.href='/get_token/';" />
+<input type="button" value="봇 등록" onclick="location.href='/bot_create/';" />
+<input type="button" value="봇 정보 수정" onclick="location.href='/bot_update/';" />
+<input type="button" value="심리테스트 등록" onclick="location.href='/add_survey/';" />
+
+{% if surveys %}
+<h4 style="margin-top:40px;">심리테스트 안건 목록</h4>
+<ul>
+  {% for survey in surveys %}
+  <li>
+    <a href="/add_survey/?survey_id={{survey.pk}}">{{survey.name}}({% if survey.is_valid %}사용가능{% else %}공사중{% endif %})</a>
+    <a href="/remove_survey/?survey_id={{survey.pk}}">지우기</a>
+  </li>
+  {% endfor %}
+</ul>
+{% endif %}
+{% endblock %}

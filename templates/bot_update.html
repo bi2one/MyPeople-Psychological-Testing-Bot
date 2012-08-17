@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+<form enctype="multipart/form-data" method="POST" action="/bot_update/">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" value="수정하기" />
+</form>
+{% endblock %}
+

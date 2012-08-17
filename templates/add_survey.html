@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>1. 심리테스트 등록</h3>
+<p><a href="/">메인으로 돌아가기</a></p>
+<form method="POST" action="{% if survey_id %}/add_survey/?survey_id={{survey_id}}{% else %}/add_survey/{% endif %}">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" value="등록하기/질문 목록 보기" >
+</form>
+{% endblock %}

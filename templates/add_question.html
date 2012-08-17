@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% block content %}
+<h3>2. 질문 등록</h3>
+<p>현재, <span style="font-weight:bold;">"{{ survey.name }}"</span> 테스트를 작업중입니다</p>
+<p><a href="/add_survey/?survey_id={{survey.pk}}">안건 등록으로 돌아가기</a></p>
+{% if survey.question_set.all %}
+<h4>질문 목록(답변 편집하려면 클릭)</h4>
+<ul>
+  {% for question in survey.question_set.all %}
+  <li>
+    <a href="/add_answer/?question_id={{question.pk}}">{{question.content}}({{question.answer_set.all.count}}개의 답변)</a>
+    <a href="/remove_question/?survey_id={{survey.pk}}&question_id={{question.pk}}">지우기</a>
+  </li>
+  {% endfor %}
+</ul>
+{% endif %}
+<form method="POST" action="/add_question/?survey_id={{ survey.pk }}">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <input type="submit" value="추가하기" >
+</form>
+<input type="button" value="심리테스트 결과 등록하러 가기" onclick="location.href='/add_result/?survey_id={{ survey.pk }}';" />
+{% endblock %}
