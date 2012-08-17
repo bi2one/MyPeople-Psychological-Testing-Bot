@@ -61,7 +61,7 @@ class BotManager(object):
             files = dict(file = file)
         result_json = self.oauth_manager.access_resource(dict(name = name,
                                                               status = status,
-                                                              callback = callback),
+                                                              receiveUrl = callback),
                                                          settings.pb_edit_url,
                                                          files=files)
         result = ujson.loads(result_json)
